@@ -8,7 +8,7 @@
     <title>ToDoList - Tam</title>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -19,12 +19,11 @@
         <div class="card__header">
             <img src="./img/X2oObC4.png" />
         </div>
-        <!-- <h2>hello!</h2> -->
         <div class="card__body">
             <div class="filter-btn">
                 <a id="one" href="#"><i class="fa fa-check-circle"></i></a>
-                <a id="two" href="#"><i class="fa fa-sort-alpha-down"></i></a>
-                <a id="three" href="#"><i class="fa fa-sort-alpha-up"></i></a>
+                <a id="two" onclick="sortAZ()" href="#"><i class="fa fa-sort-alpha-down"></i></a>
+                <a id="three" onclick="sortZA()" href="#"><i class="fa fa-sort-alpha-up"></i></a>
                 <a id="all" href="#"><i class="fa fa-clock"></i></a>
                 <span class="toggle-btn">
                     <i class="fa fa-filter"></i>
@@ -34,7 +33,7 @@
             <div class="card__content">
                 <div class="card__title">
                     <h2>My Tasks</h2>
-                    <p>September 9,2020</p>
+                    <p id="currDate"></p>
 
                 </div>
                 <div class="card__add">
@@ -45,7 +44,9 @@
                 </div>
                 <div class="card__todo">
                     <!-- Uncompleted tasks -->
-                    <ul class="todo" id="todo"></ul>
+                    <ul class="todo" id="todo">
+                        
+                    </ul>
                     <!-- Completed tasks -->
                     <ul class="todo" id="completed"></ul>
                 </div>
@@ -75,7 +76,8 @@
         });
     </script>
 
-    <script src="./js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="./js/main.js"></script>
 
 
 </body>

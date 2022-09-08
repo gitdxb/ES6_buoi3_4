@@ -328,3 +328,27 @@ ul.todo#completed li .buttons .complete .far{
 ul.todo#completed span{
   color: #25b99a;
 }
+.myCheckBox {
+  margin-right: 5px;
+}
+
+ul.todo li {
+  position: relative;
+}
+
+ul.todo li .fa-trash {
+  position: absolute;
+  right: 6px;
+  top: 9px;
+  color: rgba(70, 64, 64, 0.582);
+  cursor: pointer;
+  transition: all .5s;
+}
+
+ul.todo li .fa-trash:hover {
+  color: #000;
+}
+#checkedText {
+  text-decoration: line-through;
+  color: rgba(70, 64, 64, 0.582);
+}
