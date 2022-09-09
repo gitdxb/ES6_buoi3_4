@@ -2,7 +2,6 @@ import TodoList from "./TodoList.js";
 import TodoListService from "./TodoListService.js";
 
 const todoService = new TodoListService();
-//let taskList = [];
 /* ---------------------- // 1: adding a new task ---------------------- */
 let addTask = () => {
     let text = document.querySelector("#newTask").value;
@@ -16,9 +15,7 @@ let addTask = () => {
 
     // save task to API
     todoService.addTask(newTask);
-    console.log('New task aadded: ', newTask);
     getTask();
-
     alert("New task!");
     location.reload();
 }
@@ -28,11 +25,8 @@ document.querySelector("#addItem").onclick = addTask;
 let getTask = () => {
     todoService.getTodoList()
     .then((result) => {
-        console.log("data cua tui: ", result.data);
         showTask(result.data);
         showDoneTask(result.data);
-        //taskList.push(result.data);
-        listSorting(result.data);
     })
     .catch((error) => {
         console.log(error);
@@ -58,7 +52,6 @@ let showTask = (data) => {
         }
     });   
 }
-
 
 /* ------------------ // 2: check when a task is done ------------------ */
 
@@ -122,32 +115,45 @@ let deleteTask = (id) => {
 window.deleteTask = deleteTask;
 
 /* ------------------------- // 4: Sorting Asc, Des ------------------------- */
-// let sortAZ = () => {
-//     taskList.sort((a, b) => {
-//         return a.text.localeCompare(b.text);
-//     });
-//     getTask();
-// };
 
-// let sortZA = () => {
-//     taskList.sort((a, b) => {
-//         return a.text.localeCompare(b.text) * -1;
-//     });
-//     getTask();
-// };
-// window.sortAZ = sortAZ;
-// window.sortZA = sortZA;
+let compareStringsMain = () => {
+    todoService.getTodoList()
+    .then((result) => {
+        
+        // store API to tasks array
+        let tasks = result.data;
 
-let listSorting = (data) => {
-    let taskList = [];
-    data.map((task) => {
-        console.log(task.text);
-        taskList.push(task.text);
+        // sorting text field alphabetically
+        let sortedArray = tasks.sort((a, b) => {
+            return compareStrings(a.text, b.text);
+        });
+
+        // add event listener when sort button is clicked
+        let sortAZ = document.querySelector("#two");
+        sortAZ.addEventListener("click", () => {
+            showTask(sortedArray);
+        });
+        
+        let sortZA = document.querySelector("#three");
+        sortZA.addEventListener("click", () => {
+            showTask(sortedArray.reverse());
+        });
     })
-    console.log("list text ", taskList)
-    
-}
+    .catch((error) => {
+        // fail to load API content
+        console.log(error);
+    });
 
+    // func to compare string in array
+    let compareStrings = (a, b) => {
+        // convert all string to lower case
+        a = a.toLowerCase();
+        b = b.toLowerCase();
+      
+        return (a < b) ? -1 : (a > b) ? 1 : 0;
+    }
+}
+compareStringsMain();
 
 // Display current date to UI
 let currentDate = () => {
